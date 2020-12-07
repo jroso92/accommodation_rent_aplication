@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <table class="table table-striped">
+    <a href="{{route('reviews.create') }}" class="btn btn-primary mt-5">Add</a>
+    <table class="table table-striped mt-3">
     <thead>
         <tr>
         <th scope="col">Id</th>
         <th scope="col">Review</th>
+        <th scope="col">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +15,10 @@
         <tr>
             <td>{{ $review->id}}</td>
             <td>{{ $review->review}}</td>
+            <td>
+            <a class="btn btn-outline-primary" href="{{route('reviews.show', ['review' => $review->id]) }}">Details</a>
+            <a class="btn btn-outline-primary" href="{{route('reviews.edit', ['review' => $review->id]) }}">Edit</a>
+            </td>
         </tr>
     @endforeach 
     </tbody>

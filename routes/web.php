@@ -25,7 +25,7 @@ use App\Http\Controllers\Review;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('accommodation_types', Accommodation_typeController::class);
 Route::resource('accommodations', AccommodationController::class);

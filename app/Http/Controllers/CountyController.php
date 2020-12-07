@@ -48,7 +48,7 @@ class CountyController extends Controller
     public function show($id)
     {
         $county = County::findOrFail($id);
-        dd($county);
+        return view('counties.show', compact('county'));
     }
 
     /**

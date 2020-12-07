@@ -48,7 +48,7 @@ class BookingController extends Controller
     public function show($id)
     {
         $booking = Booking::findOrFail($id);
-        dd($booking);
+        return view('bookings.show', compact('booking'));
     }
 
     /**

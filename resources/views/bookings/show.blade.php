@@ -1,0 +1,16 @@
+@extends('layouts.app')
+
+@section('content')
+    <div>
+        <h3>Bookings</h3>
+        <ul class="list-unstyled">
+            <li>Reserved at: {{ $booking->reserved_at }}</li>
+            <li>Reserved until: {{ $booking->reserved_until }}</li>
+            <li>Adult no: {{ $booking->adult_no }}</li>
+            <li>Child no: {{ $booking->child_no }}</li>
+            <li>Price: {{ $booking->price }}</li>
+        </ul>
+        <a href="{{route('bookings.index') }}" class="btn btn-outline-primary">Back</a>
+    </div>
+@endsection
+        

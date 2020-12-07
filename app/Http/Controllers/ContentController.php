@@ -48,7 +48,7 @@ class ContentController extends Controller
     public function show($id)
     {
         $content = Content::findOrFail($id);
-        dd($content);
+        return view('contents.show', compact('content'));
     }
 
     /**

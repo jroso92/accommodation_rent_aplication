@@ -48,7 +48,7 @@ class ActivityController extends Controller
     public function show($id)
     {
         $activity = Activity::findOrFail($id);
-        dd($activity);
+        return view('activities.show', compact('activity'));
     }
 
     /**

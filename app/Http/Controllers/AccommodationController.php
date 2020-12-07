@@ -49,7 +49,7 @@ class AccommodationController extends Controller
     public function show($id)
     {
         $accommodation = Accommodation::findOrFail($id);
-        dd($accommodation);
+        return view('accommodations.show', compact('accommodation'));
     }
 
     /**

@@ -48,7 +48,7 @@ class Accommodation_typeController extends Controller
     public function show($id)
     {
         $accommodation_type = Accommodation_type::findOrFail($id);
-        dd($accommodation_type);
+        return view('accommodation_types.show', compact('accommodation_type'));
     }
 
     /**

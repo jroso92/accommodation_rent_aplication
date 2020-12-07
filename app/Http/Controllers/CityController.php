@@ -48,7 +48,7 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::findOrFail($id);
-        dd($city);
+        return view('cities.show', compact('city'));
     }
 
     /**

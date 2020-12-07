@@ -19,31 +19,31 @@
         <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
         <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{{route('home') }}">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/accommodation_types">Accommodation_types</a>
+            <a class="nav-link" href="{{route('accommodation_types.index') }}">Accommodation_types</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/accommodations">Accommodations</a>
+            <a class="nav-link" href="{{route('accommodations.index') }}">Accommodations</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/activities">Activities</a>
+            <a class="nav-link" href="{{route('activities.index') }}">Activities</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/bookings">Bookings</a>
+            <a class="nav-link" href="{{route('bookings.index') }}">Bookings</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/cities">Cities</a>
+            <a class="nav-link" href="{{route('cities.index') }}">Cities</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/contents">Contents</a>
+            <a class="nav-link" href="{{route('contents.index') }}">Contents</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/counties">Counties</a>
+            <a class="nav-link" href="{{route('counties.index') }}">Counties</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/reviews">Reviews</a>
+            <a class="nav-link" href="{{route('reviews.index') }}">Reviews</a>
         </li>
         <li class="nav-item">
             <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
