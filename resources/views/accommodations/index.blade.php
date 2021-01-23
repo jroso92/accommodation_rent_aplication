@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{route('accommodation_types.create') }}" class="btn btn-primary mt-5">Add</a>
+    <a href="{{route('accommodations.create') }}" class="btn btn-primary mt-5">Add</a>
     <table class="table table-striped mt-3">
     <thead>
         <tr>
@@ -14,6 +14,8 @@
         <th scope="col">Max person count</th>
         <th scope="col">Is available</th>
         <th scope="col">Price per night</th>
+        <th scope="col">Accommodation type</th>
+        <th scope="col">City name</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -29,6 +31,9 @@
             <td>{{ $accommodation->max_person_count}}</td>
             <td>{{ $accommodation->is_available}}</td>
             <td>{{ $accommodation->price_per_night}}</td>
+            <td>{{ $accommodation->accommodationType->name ?? ''}}</td>
+            <td>{{ $accommodation->city->name ?? ''}}</td>
+
             <td>
             <a class="btn btn-outline-primary" href="{{route('accommodations.show', ['accommodation' => $accommodation->id]) }}">Details</a>
             <a class="btn btn-outline-primary" href="{{route('accommodations.edit', ['accommodation' => $accommodation->id]) }}">Edit</a>

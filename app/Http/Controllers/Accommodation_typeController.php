@@ -25,7 +25,7 @@ class Accommodation_typeController extends Controller
      */
     public function create()
     {
-        //
+        return view('accommodation_types.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class Accommodation_typeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+        $accommodation_type = Accommodation_type::create($validated);
+        return view('accommodation_types.show', compact('accommodation_type'));
     }
 
     /**
@@ -59,7 +63,8 @@ class Accommodation_typeController extends Controller
      */
     public function edit($id)
     {
-        //
+        $accommodation_type = Accommodation_type::findOrFail($id);
+        return view('accommodation_types.edit', compact('accommodation_type'));
     }
 
     /**
@@ -71,7 +76,14 @@ class Accommodation_typeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+        $accommodation_type = Accommodation_type::findOrFail($id);
+        $accommodation_type->fill($validated);
+        $accommodation_type->save();
+
+        return view('accommodation_types.show', compact('accommodation_type'));
     }
 
     /**
@@ -82,6 +94,8 @@ class Accommodation_typeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Accommodation_type::destroy($id);
+
+        return redirect()->route('accommodation_types.index');
     }
 }

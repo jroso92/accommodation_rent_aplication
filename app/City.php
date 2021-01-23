@@ -10,4 +10,9 @@ class City extends Model
         'name',
         'county_id'
     ];
+
+    public function county() {return $this->belongsTo(County::class);}
+
+    public function accommodations() {return $this->hasMany(Accommodation::class);}
+
 }

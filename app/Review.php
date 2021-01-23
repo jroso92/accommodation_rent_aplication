@@ -10,4 +10,7 @@ class Review extends Model
         'review',
         'accommodation_id'
     ];
+
+    public function accommodation() {return $this->belongsTo(Accommodation::class);}
+
 }

@@ -15,8 +15,14 @@ class CreateAccommodationContentTable extends Migration
     {
         Schema::create('accommodation_content', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('accommodation_id')->references('id')->on('accommodations');
-            $table->foreignId('content_id')->references('id')->on('contents');
+            $table->foreignId('accommodation_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
+            $table->foreignId('content_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->timestamps();
         });
     }

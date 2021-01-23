@@ -7,6 +7,7 @@
         <tr>
         <th scope="col">Id</th>
         <th scope="col">Review</th>
+        <th scope="col">Accommodation name</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -15,6 +16,7 @@
         <tr>
             <td>{{ $review->id}}</td>
             <td>{{ $review->review}}</td>
+            <td>{{ $review->accommodation->name ?? ''}}</td>
             <td>
             <a class="btn btn-outline-primary" href="{{route('reviews.show', ['review' => $review->id]) }}">Details</a>
             <a class="btn btn-outline-primary" href="{{route('reviews.edit', ['review' => $review->id]) }}">Edit</a>

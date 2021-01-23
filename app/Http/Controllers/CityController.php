@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\City;
+use App\County;
 
 class CityController extends Controller
 {
@@ -14,7 +15,7 @@ class CityController extends Controller
      */
     public function index()
     {
-        $cities = City::paginate();
+        $cities = City::with(['county'])->paginate();
         return view('cities.index', compact('cities'));
     }
 
@@ -25,7 +26,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        return view('cities.create');
     }
 
     /**
@@ -36,7 +37,12 @@ class CityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'county_id' => 'required|numeric',
+        ]);
+        $city = City::create($validated);
+        return view('cities.show', compact('city'));
     }
 
     /**
@@ -59,7 +65,11 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $city = City::findOrFail($id);
+
+        $counties = County::pluck('name', 'id');
+
+        return view('cities.edit', compact('city', 'counties'));
     }
 
     /**
@@ -71,7 +81,15 @@ class CityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255',
+            'county_id' => 'required|numeric',
+        ]);
+        $city = City::findOrFail($id);
+        $city->fill($validated);
+        $city->save();
+        
+        return view('cities.show', compact('city'));
     }
 
     /**
@@ -82,6 +100,8 @@ class CityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        City::destroy($id);
+
+        return redirect()->route('cities.index');
     }
 }

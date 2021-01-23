@@ -11,6 +11,7 @@
         <th scope="col">Adult no</th>
         <th scope="col">Child no</th>
         <th scope="col">Price</th>
+        <th scope="col">Accommodation name</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -23,6 +24,7 @@
             <td>{{ $booking->adult_no}}</td>
             <td>{{ $booking->child_no}}</td>
             <td>{{ $booking->price}}</td>
+            <td>{{ $booking->accommodation->name ?? ''}}</td>
             <td>
             <a class="btn btn-outline-primary" href="{{route('bookings.show', ['booking' => $booking->id]) }}">Details</a>
             <a class="btn btn-outline-primary" href="{{route('bookings.edit', ['booking' => $booking->id]) }}">Edit</a>

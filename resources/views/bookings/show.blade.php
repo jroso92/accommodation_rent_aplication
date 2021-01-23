@@ -11,6 +11,13 @@
             <li>Price: {{ $booking->price }}</li>
         </ul>
         <a href="{{route('bookings.index') }}" class="btn btn-outline-primary">Back</a>
+        <a class="btn btn-outline-primary" href="{{route('bookings.edit', ['booking' => $booking->id]) }}">Edit</a>
+        <form class="form-inline" action="{{ route('bookings.destroy', ['booking' => $booking->id]) }}" method="POST">
+            <!-- CSRF token -->
+            @csrf
+            @method('DELETE')
+            <button type="submit" onclick="areYouSure(event)" class="btn btn-danger">Delete</button>
+        </form>
     </div>
 @endsection
         

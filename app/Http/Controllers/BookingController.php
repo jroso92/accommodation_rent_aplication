@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Booking;
+use App\Accommodation;
 
 class BookingController extends Controller
 {
@@ -14,7 +15,7 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::paginate();
+        $bookings = Booking::with(['accommodation'])->paginate();
         return view('bookings.index', compact('bookings'));
     }
 
@@ -25,7 +26,7 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        return view('bookings.create');
     }
 
     /**
@@ -36,7 +37,16 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'reserved_at' => 'required|date',
+            'reserved_until' => 'required|date',
+            'adult_no' => 'required|numeric',
+            'child_no' => 'required|numeric',
+            'price' => 'required|numeric',
+            'accommodation_id' => 'required|numeric'
+        ]);
+        $booking = Booking::create($validated);
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -59,7 +69,10 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $booking = Booking::findOrFail($id);
+
+        $accommodations = Accommodation::pluck('name', 'id');
+        return view('bookings.edit', compact('booking', 'accommodations'));
     }
 
     /**
@@ -71,7 +84,19 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'reserved_at' => 'required|date',
+            'reserved_until' => 'required|date',
+            'adult_no' => 'required|numeric',
+            'child_no' => 'required|numeric',
+            'price' => 'required|numeric',
+            'accommodation_id' => 'required|numeric'
+        ]);
+        $booking = Booking::findOrFail($id);
+        $booking->fill($validated);
+        $booking->save();
+
+        return view('bookings.show', compact('booking'));
     }
 
     /**
@@ -82,6 +107,8 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Booking::destroy($id);
+
+        return redirect()->route('bookings.index');
     }
 }

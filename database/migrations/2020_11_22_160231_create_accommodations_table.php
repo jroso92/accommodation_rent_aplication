@@ -23,9 +23,14 @@ class CreateAccommodationsTable extends Migration
             $table->integer('max_person_count');
             $table->boolean('is_available');
             $table->decimal('price_per_night', 8, 2);
-            $table->foreignId('type_id')->references('id')->on('accommodation_types');
-            $table->foreignId('city_id')->references('id')->on('cities');
-
+            $table->foreignId('accommodation_type_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('set null');           
+            $table->foreignId('city_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('set null');
             $table->timestamps();
         });
     }

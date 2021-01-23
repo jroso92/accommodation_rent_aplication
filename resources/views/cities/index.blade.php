@@ -7,6 +7,7 @@
         <tr>
         <th scope="col">Id</th>
         <th scope="col">Name</th>
+        <th scope="col">County name</th>
         <th scope="col">Actions</th>
         </tr>
     </thead>
@@ -15,6 +16,7 @@
         <tr>
             <td>{{ $city->id}}</td>
             <td>{{ $city->name}}</td>
+            <td>{{ $city->county->name ?? ''}}</td>
             <td>
             <a class="btn btn-outline-primary" href="{{route('cities.show', ['city' => $city->id]) }}">Details</a>
             <a class="btn btn-outline-primary" href="{{route('cities.edit', ['city' => $city->id]) }}">Edit</a>

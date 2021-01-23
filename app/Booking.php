@@ -14,4 +14,7 @@ class Booking extends Model
         'price',
         'accommodation_id'
     ];
+
+    public function accommodation() {return $this->belongsTo(Accommodation::class);}
+
 }

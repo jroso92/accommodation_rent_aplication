@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             ReviewSeeder::class,
             Accommodation_contentSeeder::class,
             BookingSeeder::class,
+            RoleSeeder::class,
+            UserSeeder::class
          ]);
     }
 }

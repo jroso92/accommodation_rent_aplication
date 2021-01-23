@@ -20,7 +20,10 @@ class CreateBookingsTable extends Migration
             $table->integer('adult_no');
             $table->integer('child_no');
             $table->decimal('price', 8, 2);
-            $table->foreignId('accommodation_id')->references('id')->on('accommodations');
+            $table->foreignId('accommodation_id')
+                ->nullable()
+                ->constrained()
+                ->onDelete('set null');
             $table->timestamps();
         });
     }

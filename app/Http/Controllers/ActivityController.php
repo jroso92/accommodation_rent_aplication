@@ -25,7 +25,7 @@ class ActivityController extends Controller
      */
     public function create()
     {
-        //
+        return view('activities.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class ActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+        $activity = Activity::create($validated);
+        return view('activities.show', compact('activity'));
     }
 
     /**
@@ -59,7 +63,8 @@ class ActivityController extends Controller
      */
     public function edit($id)
     {
-        //
+        $activity = Activity::findOrFail($id);
+        return view('activities.edit', compact('activity'));
     }
 
     /**
@@ -71,7 +76,15 @@ class ActivityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|max:255'
+        ]);
+
+        $activity = Activity::findOrFail($id);
+        $activity->fill($validated);
+        $activity->save();
+        
+        return view('activities.show', compact('activity'));
     }
 
     /**
@@ -82,6 +95,8 @@ class ActivityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Activity::destroy($id);
+
+        return redirect()->route('activities.index');
     }
 }

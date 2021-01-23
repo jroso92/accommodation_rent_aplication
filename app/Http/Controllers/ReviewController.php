@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Review;
+use App\Accommodation;
 
 class ReviewController extends Controller
 {
@@ -14,7 +15,7 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        $reviews = Review::paginate();
+        $reviews = Review::with(['accommodation'])->paginate();
         return view('reviews.index', compact('reviews'));
     }
 
@@ -25,7 +26,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+        return view('reviews.create');
     }
 
     /**
@@ -36,7 +37,12 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'review' => 'required|numeric',
+            'accommodation_id' => 'required|numeric',
+        ]);
+        $review = Review::create($validated);
+        return view('reviews.show', compact('review'));
     }
 
     /**
@@ -59,7 +65,10 @@ class ReviewController extends Controller
      */
     public function edit($id)
     {
-        //
+        $review = Review::findOrFail($id);
+        $accommodations = Accommodation::pluck('name', 'id');
+
+        return view('reviews.edit', compact('review', 'accommodations'));
     }
 
     /**
@@ -71,7 +80,15 @@ class ReviewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'review' => 'required|numeric',
+            'accommodation_id' => 'required|numeric',
+        ]);
+        $review = Review::findOrFail($id);
+        $review->fill($validated);
+        $review->save();
+        
+        return view('reviews.show', compact('review'));
     }
 
     /**
@@ -82,6 +99,8 @@ class ReviewController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Review::destroy($id);
+
+        return redirect()->route('reviews.index');
     }
 }

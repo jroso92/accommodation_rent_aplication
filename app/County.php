@@ -10,4 +10,6 @@ class County extends Model
         'name',
         'county_id',
     ];
+
+    public function cities() {return $this->hasMany(City::class);}
 }

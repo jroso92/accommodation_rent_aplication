@@ -22,7 +22,7 @@ class AccommodationSeeder extends Seeder
                 'max_person_count' => 6,
                 'is_available' => true,
                 'price_per_night' => 1800.00,
-                'type_id' => 1,
+                'accommodation_type_id' => 1,
                 'city_id' => 1,
             ],
         ]);
